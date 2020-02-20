@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package productproto;
+
+message RequestHeader {
+    string token = 1;
+}
+
+message Levy {
+    int32 id = 1;
+    string name = 2;
+    int32 amount = 3;
+}
+
+message CreateField {
+    int32 warehouse = 1;
+    int32 vendor = 2;
+    string name = 3;
+    string description = 4;
+    int32 category = 5;
+    string brandName = 6;
+    string modelNumber = 7;
+    int32  netCost = 8;
+    repeated Levy levies = 9;
+}
+
+message UpdateField {
+    int32 warehouse = 1;
+    int32 vendor = 2;
+    string name = 3;
+    string description = 4;
+    int32 category = 5;
+    string brandName = 6;
+    string modelNumber = 7;
+    int32  netCost = 8;
+    repeated Levy levies = 9;
+}
+
+message RawRequest {
+    RequestHeader header = 1;
+}
+
+message GetRequest {
+    RequestHeader header = 1;
+    int32 id = 2;
+}
+
+message CreateRequest {
+    RequestHeader header = 1;
+    CreateField field = 2;
+}
+
+message UpdateRequest {
+    RequestHeader header = 1;
+    int32 id = 2;
+    UpdateField field = 3;
+}
+
+message ActionRequest {
+    RequestHeader header = 1;
+    int32 id = 2;
+    string name = 3;
+}
+
+message DataResponse {
+    int32 statusCode = 1;
+    string message = 2;
+    message Data {
+        string id = 1;
+        int32 warehouseID = 2;
+        string warehouse = 3;
+        int32 vendorID = 4;
+        string vendor = 5;
+        string name = 6;
+        string description = 7;
+        string brandName = 8;
+        string modelNumber = 9;
+        int32 netCost = 10;
+        repeated Levy levies = 11;
+        int32 availableQuantity = 12;
+        int32 reservedQuantity = 13;
+        int64 totalCost = 14;
+        string createdDate = 15;
+        string createdBy = 16;
+        string lastModifiedBy = 17;
+        string lastModifiedDate = 18;
+        string recordState = 19;
+        int64 referencedBy = 20;
+    }
+    Data data = 3;
+}
+
+message RawResponse {
+    int32 statusCode = 1;
+    string message = 2;
+    message LevyType {
+        int32 id = 1;
+        string name = 2;
+    }
+    message Data {
+        repeated LevyType levyTypes = 1;
+    }
+    Data data = 3;
+}
+
+service Employee {
+    rpc Raw(RawRequest) returns (RawResponse);
+    rpc Create(CreateRequest) returns (DataResponse);
+    rpc Get(GetRequest) returns (DataResponse);
+    rpc Update(UpdateRequest) returns (DataResponse);
+    rpc Action(ActionRequest) returns (DataResponse);
+}
+
