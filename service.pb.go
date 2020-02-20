@@ -66,7 +66,8 @@ func (m *RequestHeader) GetToken() string {
 type Levy struct {
 	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Amount               int32    `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Rate                 int32    `protobuf:"varint,3,opt,name=rate,proto3" json:"rate,omitempty"`
+	Amount               int32    `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -111,6 +112,13 @@ func (m *Levy) GetName() string {
 	return ""
 }
 
+func (m *Levy) GetRate() int32 {
+	if m != nil {
+		return m.Rate
+	}
+	return 0
+}
+
 func (m *Levy) GetAmount() int32 {
 	if m != nil {
 		return m.Amount
@@ -128,6 +136,11 @@ type CreateField struct {
 	ModelNumber          string   `protobuf:"bytes,7,opt,name=modelNumber,proto3" json:"modelNumber,omitempty"`
 	NetCost              int32    `protobuf:"varint,8,opt,name=netCost,proto3" json:"netCost,omitempty"`
 	Levies               []*Levy  `protobuf:"bytes,9,rep,name=levies,proto3" json:"levies,omitempty"`
+	TotalCost            int32    `protobuf:"varint,10,opt,name=totalCost,proto3" json:"totalCost,omitempty"`
+	SellingCostBeforeTax int32    `protobuf:"varint,11,opt,name=sellingCostBeforeTax,proto3" json:"sellingCostBeforeTax,omitempty"`
+	SellingTaxRate       int32    `protobuf:"varint,12,opt,name=sellingTaxRate,proto3" json:"sellingTaxRate,omitempty"`
+	SellingTaxAmount     int32    `protobuf:"varint,13,opt,name=sellingTaxAmount,proto3" json:"sellingTaxAmount,omitempty"`
+	SellingCostAfterTax  int32    `protobuf:"varint,14,opt,name=sellingCostAfterTax,proto3" json:"sellingCostAfterTax,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -221,6 +234,41 @@ func (m *CreateField) GetLevies() []*Levy {
 	return nil
 }
 
+func (m *CreateField) GetTotalCost() int32 {
+	if m != nil {
+		return m.TotalCost
+	}
+	return 0
+}
+
+func (m *CreateField) GetSellingCostBeforeTax() int32 {
+	if m != nil {
+		return m.SellingCostBeforeTax
+	}
+	return 0
+}
+
+func (m *CreateField) GetSellingTaxRate() int32 {
+	if m != nil {
+		return m.SellingTaxRate
+	}
+	return 0
+}
+
+func (m *CreateField) GetSellingTaxAmount() int32 {
+	if m != nil {
+		return m.SellingTaxAmount
+	}
+	return 0
+}
+
+func (m *CreateField) GetSellingCostAfterTax() int32 {
+	if m != nil {
+		return m.SellingCostAfterTax
+	}
+	return 0
+}
+
 type UpdateField struct {
 	Warehouse            int32    `protobuf:"varint,1,opt,name=warehouse,proto3" json:"warehouse,omitempty"`
 	Vendor               int32    `protobuf:"varint,2,opt,name=vendor,proto3" json:"vendor,omitempty"`
@@ -231,6 +279,11 @@ type UpdateField struct {
 	ModelNumber          string   `protobuf:"bytes,7,opt,name=modelNumber,proto3" json:"modelNumber,omitempty"`
 	NetCost              int32    `protobuf:"varint,8,opt,name=netCost,proto3" json:"netCost,omitempty"`
 	Levies               []*Levy  `protobuf:"bytes,9,rep,name=levies,proto3" json:"levies,omitempty"`
+	TotalCost            int32    `protobuf:"varint,10,opt,name=totalCost,proto3" json:"totalCost,omitempty"`
+	SellingCostBeforeTax int32    `protobuf:"varint,11,opt,name=sellingCostBeforeTax,proto3" json:"sellingCostBeforeTax,omitempty"`
+	SellingTaxRate       int32    `protobuf:"varint,12,opt,name=sellingTaxRate,proto3" json:"sellingTaxRate,omitempty"`
+	SellingTaxAmount     int32    `protobuf:"varint,13,opt,name=sellingTaxAmount,proto3" json:"sellingTaxAmount,omitempty"`
+	SellingCostAfterTax  int32    `protobuf:"varint,14,opt,name=sellingCostAfterTax,proto3" json:"sellingCostAfterTax,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -322,6 +375,41 @@ func (m *UpdateField) GetLevies() []*Levy {
 		return m.Levies
 	}
 	return nil
+}
+
+func (m *UpdateField) GetTotalCost() int32 {
+	if m != nil {
+		return m.TotalCost
+	}
+	return 0
+}
+
+func (m *UpdateField) GetSellingCostBeforeTax() int32 {
+	if m != nil {
+		return m.SellingCostBeforeTax
+	}
+	return 0
+}
+
+func (m *UpdateField) GetSellingTaxRate() int32 {
+	if m != nil {
+		return m.SellingTaxRate
+	}
+	return 0
+}
+
+func (m *UpdateField) GetSellingTaxAmount() int32 {
+	if m != nil {
+		return m.SellingTaxAmount
+	}
+	return 0
+}
+
+func (m *UpdateField) GetSellingCostAfterTax() int32 {
+	if m != nil {
+		return m.SellingCostAfterTax
+	}
+	return 0
 }
 
 type RawRequest struct {
@@ -567,6 +655,108 @@ func (m *ActionRequest) GetName() string {
 	return ""
 }
 
+type ProductQuantityRequest struct {
+	Header               *RequestHeader               `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
+	Id                   int32                        `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Data                 *ProductQuantityRequest_Data `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
+	XXX_unrecognized     []byte                       `json:"-"`
+	XXX_sizecache        int32                        `json:"-"`
+}
+
+func (m *ProductQuantityRequest) Reset()         { *m = ProductQuantityRequest{} }
+func (m *ProductQuantityRequest) String() string { return proto.CompactTextString(m) }
+func (*ProductQuantityRequest) ProtoMessage()    {}
+func (*ProductQuantityRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a0b84a42fa06f626, []int{9}
+}
+
+func (m *ProductQuantityRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ProductQuantityRequest.Unmarshal(m, b)
+}
+func (m *ProductQuantityRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ProductQuantityRequest.Marshal(b, m, deterministic)
+}
+func (m *ProductQuantityRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProductQuantityRequest.Merge(m, src)
+}
+func (m *ProductQuantityRequest) XXX_Size() int {
+	return xxx_messageInfo_ProductQuantityRequest.Size(m)
+}
+func (m *ProductQuantityRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProductQuantityRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProductQuantityRequest proto.InternalMessageInfo
+
+func (m *ProductQuantityRequest) GetHeader() *RequestHeader {
+	if m != nil {
+		return m.Header
+	}
+	return nil
+}
+
+func (m *ProductQuantityRequest) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *ProductQuantityRequest) GetData() *ProductQuantityRequest_Data {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type ProductQuantityRequest_Data struct {
+	ReservedQuantity     int32    `protobuf:"varint,1,opt,name=reservedQuantity,proto3" json:"reservedQuantity,omitempty"`
+	AvailableQuantity    int32    `protobuf:"varint,2,opt,name=availableQuantity,proto3" json:"availableQuantity,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ProductQuantityRequest_Data) Reset()         { *m = ProductQuantityRequest_Data{} }
+func (m *ProductQuantityRequest_Data) String() string { return proto.CompactTextString(m) }
+func (*ProductQuantityRequest_Data) ProtoMessage()    {}
+func (*ProductQuantityRequest_Data) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a0b84a42fa06f626, []int{9, 0}
+}
+
+func (m *ProductQuantityRequest_Data) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ProductQuantityRequest_Data.Unmarshal(m, b)
+}
+func (m *ProductQuantityRequest_Data) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ProductQuantityRequest_Data.Marshal(b, m, deterministic)
+}
+func (m *ProductQuantityRequest_Data) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProductQuantityRequest_Data.Merge(m, src)
+}
+func (m *ProductQuantityRequest_Data) XXX_Size() int {
+	return xxx_messageInfo_ProductQuantityRequest_Data.Size(m)
+}
+func (m *ProductQuantityRequest_Data) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProductQuantityRequest_Data.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProductQuantityRequest_Data proto.InternalMessageInfo
+
+func (m *ProductQuantityRequest_Data) GetReservedQuantity() int32 {
+	if m != nil {
+		return m.ReservedQuantity
+	}
+	return 0
+}
+
+func (m *ProductQuantityRequest_Data) GetAvailableQuantity() int32 {
+	if m != nil {
+		return m.AvailableQuantity
+	}
+	return 0
+}
+
 type DataResponse struct {
 	StatusCode           int32              `protobuf:"varint,1,opt,name=statusCode,proto3" json:"statusCode,omitempty"`
 	Message              string             `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
@@ -580,7 +770,7 @@ func (m *DataResponse) Reset()         { *m = DataResponse{} }
 func (m *DataResponse) String() string { return proto.CompactTextString(m) }
 func (*DataResponse) ProtoMessage()    {}
 func (*DataResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0b84a42fa06f626, []int{9}
+	return fileDescriptor_a0b84a42fa06f626, []int{10}
 }
 
 func (m *DataResponse) XXX_Unmarshal(b []byte) error {
@@ -623,36 +813,49 @@ func (m *DataResponse) GetData() *DataResponse_Data {
 }
 
 type DataResponse_Data struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	WarehouseID          int32    `protobuf:"varint,2,opt,name=warehouseID,proto3" json:"warehouseID,omitempty"`
-	Warehouse            string   `protobuf:"bytes,3,opt,name=warehouse,proto3" json:"warehouse,omitempty"`
-	VendorID             int32    `protobuf:"varint,4,opt,name=vendorID,proto3" json:"vendorID,omitempty"`
-	Vendor               string   `protobuf:"bytes,5,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	Name                 string   `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	Description          string   `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
-	BrandName            string   `protobuf:"bytes,8,opt,name=brandName,proto3" json:"brandName,omitempty"`
-	ModelNumber          string   `protobuf:"bytes,9,opt,name=modelNumber,proto3" json:"modelNumber,omitempty"`
-	NetCost              int32    `protobuf:"varint,10,opt,name=netCost,proto3" json:"netCost,omitempty"`
-	Levies               []*Levy  `protobuf:"bytes,11,rep,name=levies,proto3" json:"levies,omitempty"`
-	AvailableQuantity    int32    `protobuf:"varint,12,opt,name=availableQuantity,proto3" json:"availableQuantity,omitempty"`
-	ReservedQuantity     int32    `protobuf:"varint,13,opt,name=reservedQuantity,proto3" json:"reservedQuantity,omitempty"`
-	TotalCost            int64    `protobuf:"varint,14,opt,name=totalCost,proto3" json:"totalCost,omitempty"`
-	CreatedDate          string   `protobuf:"bytes,15,opt,name=createdDate,proto3" json:"createdDate,omitempty"`
-	CreatedBy            string   `protobuf:"bytes,16,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
-	LastModifiedBy       string   `protobuf:"bytes,17,opt,name=lastModifiedBy,proto3" json:"lastModifiedBy,omitempty"`
-	LastModifiedDate     string   `protobuf:"bytes,18,opt,name=lastModifiedDate,proto3" json:"lastModifiedDate,omitempty"`
-	RecordState          string   `protobuf:"bytes,19,opt,name=recordState,proto3" json:"recordState,omitempty"`
-	ReferencedBy         int64    `protobuf:"varint,20,opt,name=referencedBy,proto3" json:"referencedBy,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Id                          string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	WarehouseID                 int32    `protobuf:"varint,2,opt,name=warehouseID,proto3" json:"warehouseID,omitempty"`
+	Warehouse                   string   `protobuf:"bytes,3,opt,name=warehouse,proto3" json:"warehouse,omitempty"`
+	VendorID                    int32    `protobuf:"varint,4,opt,name=vendorID,proto3" json:"vendorID,omitempty"`
+	Vendor                      string   `protobuf:"bytes,5,opt,name=vendor,proto3" json:"vendor,omitempty"`
+	CategoryID                  int32    `protobuf:"varint,6,opt,name=categoryID,proto3" json:"categoryID,omitempty"`
+	Category                    string   `protobuf:"bytes,7,opt,name=category,proto3" json:"category,omitempty"`
+	Name                        string   `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
+	Description                 string   `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
+	SkuNumber                   string   `protobuf:"bytes,10,opt,name=skuNumber,proto3" json:"skuNumber,omitempty"`
+	BrandName                   string   `protobuf:"bytes,11,opt,name=brandName,proto3" json:"brandName,omitempty"`
+	ModelNumber                 string   `protobuf:"bytes,12,opt,name=modelNumber,proto3" json:"modelNumber,omitempty"`
+	NetCost                     int32    `protobuf:"varint,13,opt,name=netCost,proto3" json:"netCost,omitempty"`
+	DisplayNetCost              string   `protobuf:"bytes,14,opt,name=displayNetCost,proto3" json:"displayNetCost,omitempty"`
+	Levies                      []*Levy  `protobuf:"bytes,15,rep,name=levies,proto3" json:"levies,omitempty"`
+	AvailableQuantity           int32    `protobuf:"varint,16,opt,name=availableQuantity,proto3" json:"availableQuantity,omitempty"`
+	ReservedQuantity            int32    `protobuf:"varint,17,opt,name=reservedQuantity,proto3" json:"reservedQuantity,omitempty"`
+	TotalCost                   int32    `protobuf:"varint,18,opt,name=totalCost,proto3" json:"totalCost,omitempty"`
+	DisplayTotalCost            string   `protobuf:"bytes,19,opt,name=displayTotalCost,proto3" json:"displayTotalCost,omitempty"`
+	SellingCostBeforeTax        int32    `protobuf:"varint,20,opt,name=sellingCostBeforeTax,proto3" json:"sellingCostBeforeTax,omitempty"`
+	DisplaySellingCostBeforeTax string   `protobuf:"bytes,21,opt,name=displaySellingCostBeforeTax,proto3" json:"displaySellingCostBeforeTax,omitempty"`
+	SellingTaxRate              int32    `protobuf:"varint,22,opt,name=sellingTaxRate,proto3" json:"sellingTaxRate,omitempty"`
+	DisplaySellingTaxRate       string   `protobuf:"bytes,23,opt,name=displaySellingTaxRate,proto3" json:"displaySellingTaxRate,omitempty"`
+	SellingTaxAmount            int32    `protobuf:"varint,24,opt,name=sellingTaxAmount,proto3" json:"sellingTaxAmount,omitempty"`
+	DisplaySellingTaxAmount     string   `protobuf:"bytes,25,opt,name=displaySellingTaxAmount,proto3" json:"displaySellingTaxAmount,omitempty"`
+	SellingCostAfterTax         int32    `protobuf:"varint,26,opt,name=sellingCostAfterTax,proto3" json:"sellingCostAfterTax,omitempty"`
+	DisplaySellingCostAfterTax  string   `protobuf:"bytes,27,opt,name=displaySellingCostAfterTax,proto3" json:"displaySellingCostAfterTax,omitempty"`
+	CreatedDate                 string   `protobuf:"bytes,28,opt,name=createdDate,proto3" json:"createdDate,omitempty"`
+	CreatedBy                   string   `protobuf:"bytes,29,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
+	LastModifiedBy              string   `protobuf:"bytes,30,opt,name=lastModifiedBy,proto3" json:"lastModifiedBy,omitempty"`
+	LastModifiedDate            string   `protobuf:"bytes,31,opt,name=lastModifiedDate,proto3" json:"lastModifiedDate,omitempty"`
+	RecordState                 string   `protobuf:"bytes,32,opt,name=recordState,proto3" json:"recordState,omitempty"`
+	ReferencedBy                int64    `protobuf:"varint,33,opt,name=referencedBy,proto3" json:"referencedBy,omitempty"`
+	XXX_NoUnkeyedLiteral        struct{} `json:"-"`
+	XXX_unrecognized            []byte   `json:"-"`
+	XXX_sizecache               int32    `json:"-"`
 }
 
 func (m *DataResponse_Data) Reset()         { *m = DataResponse_Data{} }
 func (m *DataResponse_Data) String() string { return proto.CompactTextString(m) }
 func (*DataResponse_Data) ProtoMessage()    {}
 func (*DataResponse_Data) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0b84a42fa06f626, []int{9, 0}
+	return fileDescriptor_a0b84a42fa06f626, []int{10, 0}
 }
 
 func (m *DataResponse_Data) XXX_Unmarshal(b []byte) error {
@@ -708,6 +911,20 @@ func (m *DataResponse_Data) GetVendor() string {
 	return ""
 }
 
+func (m *DataResponse_Data) GetCategoryID() int32 {
+	if m != nil {
+		return m.CategoryID
+	}
+	return 0
+}
+
+func (m *DataResponse_Data) GetCategory() string {
+	if m != nil {
+		return m.Category
+	}
+	return ""
+}
+
 func (m *DataResponse_Data) GetName() string {
 	if m != nil {
 		return m.Name
@@ -718,6 +935,13 @@ func (m *DataResponse_Data) GetName() string {
 func (m *DataResponse_Data) GetDescription() string {
 	if m != nil {
 		return m.Description
+	}
+	return ""
+}
+
+func (m *DataResponse_Data) GetSkuNumber() string {
+	if m != nil {
+		return m.SkuNumber
 	}
 	return ""
 }
@@ -743,6 +967,13 @@ func (m *DataResponse_Data) GetNetCost() int32 {
 	return 0
 }
 
+func (m *DataResponse_Data) GetDisplayNetCost() string {
+	if m != nil {
+		return m.DisplayNetCost
+	}
+	return ""
+}
+
 func (m *DataResponse_Data) GetLevies() []*Levy {
 	if m != nil {
 		return m.Levies
@@ -764,11 +995,74 @@ func (m *DataResponse_Data) GetReservedQuantity() int32 {
 	return 0
 }
 
-func (m *DataResponse_Data) GetTotalCost() int64 {
+func (m *DataResponse_Data) GetTotalCost() int32 {
 	if m != nil {
 		return m.TotalCost
 	}
 	return 0
+}
+
+func (m *DataResponse_Data) GetDisplayTotalCost() string {
+	if m != nil {
+		return m.DisplayTotalCost
+	}
+	return ""
+}
+
+func (m *DataResponse_Data) GetSellingCostBeforeTax() int32 {
+	if m != nil {
+		return m.SellingCostBeforeTax
+	}
+	return 0
+}
+
+func (m *DataResponse_Data) GetDisplaySellingCostBeforeTax() string {
+	if m != nil {
+		return m.DisplaySellingCostBeforeTax
+	}
+	return ""
+}
+
+func (m *DataResponse_Data) GetSellingTaxRate() int32 {
+	if m != nil {
+		return m.SellingTaxRate
+	}
+	return 0
+}
+
+func (m *DataResponse_Data) GetDisplaySellingTaxRate() string {
+	if m != nil {
+		return m.DisplaySellingTaxRate
+	}
+	return ""
+}
+
+func (m *DataResponse_Data) GetSellingTaxAmount() int32 {
+	if m != nil {
+		return m.SellingTaxAmount
+	}
+	return 0
+}
+
+func (m *DataResponse_Data) GetDisplaySellingTaxAmount() string {
+	if m != nil {
+		return m.DisplaySellingTaxAmount
+	}
+	return ""
+}
+
+func (m *DataResponse_Data) GetSellingCostAfterTax() int32 {
+	if m != nil {
+		return m.SellingCostAfterTax
+	}
+	return 0
+}
+
+func (m *DataResponse_Data) GetDisplaySellingCostAfterTax() string {
+	if m != nil {
+		return m.DisplaySellingCostAfterTax
+	}
+	return ""
 }
 
 func (m *DataResponse_Data) GetCreatedDate() string {
@@ -826,7 +1120,7 @@ func (m *RawResponse) Reset()         { *m = RawResponse{} }
 func (m *RawResponse) String() string { return proto.CompactTextString(m) }
 func (*RawResponse) ProtoMessage()    {}
 func (*RawResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0b84a42fa06f626, []int{10}
+	return fileDescriptor_a0b84a42fa06f626, []int{11}
 }
 
 func (m *RawResponse) XXX_Unmarshal(b []byte) error {
@@ -880,7 +1174,7 @@ func (m *RawResponse_LevyType) Reset()         { *m = RawResponse_LevyType{} }
 func (m *RawResponse_LevyType) String() string { return proto.CompactTextString(m) }
 func (*RawResponse_LevyType) ProtoMessage()    {}
 func (*RawResponse_LevyType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0b84a42fa06f626, []int{10, 0}
+	return fileDescriptor_a0b84a42fa06f626, []int{11, 0}
 }
 
 func (m *RawResponse_LevyType) XXX_Unmarshal(b []byte) error {
@@ -926,7 +1220,7 @@ func (m *RawResponse_Data) Reset()         { *m = RawResponse_Data{} }
 func (m *RawResponse_Data) String() string { return proto.CompactTextString(m) }
 func (*RawResponse_Data) ProtoMessage()    {}
 func (*RawResponse_Data) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0b84a42fa06f626, []int{10, 1}
+	return fileDescriptor_a0b84a42fa06f626, []int{11, 1}
 }
 
 func (m *RawResponse_Data) XXX_Unmarshal(b []byte) error {
@@ -954,6 +1248,53 @@ func (m *RawResponse_Data) GetLevyTypes() []*RawResponse_LevyType {
 	return nil
 }
 
+type SimpleResponse struct {
+	StatusCode           int32    `protobuf:"varint,1,opt,name=statusCode,proto3" json:"statusCode,omitempty"`
+	Message              string   `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SimpleResponse) Reset()         { *m = SimpleResponse{} }
+func (m *SimpleResponse) String() string { return proto.CompactTextString(m) }
+func (*SimpleResponse) ProtoMessage()    {}
+func (*SimpleResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a0b84a42fa06f626, []int{12}
+}
+
+func (m *SimpleResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SimpleResponse.Unmarshal(m, b)
+}
+func (m *SimpleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SimpleResponse.Marshal(b, m, deterministic)
+}
+func (m *SimpleResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SimpleResponse.Merge(m, src)
+}
+func (m *SimpleResponse) XXX_Size() int {
+	return xxx_messageInfo_SimpleResponse.Size(m)
+}
+func (m *SimpleResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_SimpleResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SimpleResponse proto.InternalMessageInfo
+
+func (m *SimpleResponse) GetStatusCode() int32 {
+	if m != nil {
+		return m.StatusCode
+	}
+	return 0
+}
+
+func (m *SimpleResponse) GetMessage() string {
+	if m != nil {
+		return m.Message
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*RequestHeader)(nil), "productproto.RequestHeader")
 	proto.RegisterType((*Levy)(nil), "productproto.Levy")
@@ -964,67 +1305,88 @@ func init() {
 	proto.RegisterType((*CreateRequest)(nil), "productproto.CreateRequest")
 	proto.RegisterType((*UpdateRequest)(nil), "productproto.UpdateRequest")
 	proto.RegisterType((*ActionRequest)(nil), "productproto.ActionRequest")
+	proto.RegisterType((*ProductQuantityRequest)(nil), "productproto.ProductQuantityRequest")
+	proto.RegisterType((*ProductQuantityRequest_Data)(nil), "productproto.ProductQuantityRequest.Data")
 	proto.RegisterType((*DataResponse)(nil), "productproto.DataResponse")
 	proto.RegisterType((*DataResponse_Data)(nil), "productproto.DataResponse.Data")
 	proto.RegisterType((*RawResponse)(nil), "productproto.RawResponse")
 	proto.RegisterType((*RawResponse_LevyType)(nil), "productproto.RawResponse.LevyType")
 	proto.RegisterType((*RawResponse_Data)(nil), "productproto.RawResponse.Data")
+	proto.RegisterType((*SimpleResponse)(nil), "productproto.SimpleResponse")
 }
 
 func init() { proto.RegisterFile("service.proto", fileDescriptor_a0b84a42fa06f626) }
 
 var fileDescriptor_a0b84a42fa06f626 = []byte{
-	// 788 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x56, 0xdd, 0x6e, 0xe3, 0x54,
-	0x10, 0x56, 0x7e, 0xec, 0x26, 0xe3, 0xa4, 0xec, 0x1e, 0x56, 0xc8, 0x9b, 0x45, 0x4b, 0x64, 0x09,
-	0x54, 0xad, 0x50, 0x90, 0xd2, 0x3b, 0xb8, 0x21, 0xdb, 0x40, 0x5b, 0x09, 0x2a, 0xd5, 0xc0, 0x03,
-	0x9c, 0xf8, 0x4c, 0x5b, 0x0b, 0xc7, 0x27, 0x1c, 0x1f, 0xa7, 0xca, 0x03, 0xf0, 0x0e, 0x95, 0x78,
-	0x25, 0x5e, 0x87, 0x7b, 0x74, 0xc6, 0x76, 0x72, 0x9c, 0x9f, 0x16, 0xa9, 0xbd, 0xe4, 0x2e, 0xf3,
-	0x79, 0xe6, 0x9b, 0x1f, 0xcf, 0x37, 0x0e, 0xf4, 0x33, 0x54, 0xcb, 0x38, 0xc2, 0xd1, 0x42, 0x49,
-	0x2d, 0x59, 0x6f, 0xa1, 0xa4, 0xc8, 0x23, 0x4d, 0x56, 0xf0, 0x25, 0xf4, 0x43, 0xfc, 0x23, 0xc7,
-	0x4c, 0x5f, 0x20, 0x17, 0xa8, 0xd8, 0x1b, 0x70, 0xb4, 0xfc, 0x1d, 0x53, 0xbf, 0x31, 0x6c, 0x9c,
-	0x74, 0xc3, 0xc2, 0x08, 0x3e, 0x42, 0xfb, 0x27, 0x5c, 0xae, 0xd8, 0x31, 0x34, 0x63, 0x41, 0x8f,
-	0x9c, 0xb0, 0x19, 0x0b, 0xc6, 0xa0, 0x9d, 0xf2, 0x39, 0xfa, 0x4d, 0x72, 0xa6, 0xdf, 0xec, 0x33,
-	0x70, 0xf9, 0x5c, 0xe6, 0xa9, 0xf6, 0x5b, 0xe4, 0x57, 0x5a, 0xc1, 0x5f, 0x4d, 0xf0, 0xce, 0x14,
-	0x72, 0x8d, 0x3f, 0xc6, 0x98, 0x08, 0xf6, 0x39, 0x74, 0xef, 0xb9, 0xc2, 0x3b, 0x99, 0x67, 0x58,
-	0x52, 0x6e, 0x00, 0xc3, 0xb2, 0xc4, 0x54, 0x48, 0x45, 0xdc, 0x4e, 0x58, 0x5a, 0xeb, 0x8c, 0x2d,
-	0x2b, 0xe3, 0x10, 0x3c, 0x81, 0x59, 0xa4, 0xe2, 0x85, 0x8e, 0x65, 0xea, 0xb7, 0xe9, 0x91, 0x0d,
-	0xb1, 0x01, 0x74, 0x22, 0xae, 0xf1, 0x56, 0xaa, 0x95, 0xef, 0x10, 0xdf, 0xda, 0x36, 0x75, 0xcc,
-	0x14, 0x4f, 0xc5, 0x95, 0xa1, 0x75, 0x29, 0x76, 0x03, 0x18, 0xee, 0xb9, 0x14, 0x98, 0x5c, 0xe5,
-	0xf3, 0x19, 0x2a, 0xff, 0xa8, 0xe0, 0xb6, 0x20, 0xe6, 0xc3, 0x51, 0x8a, 0xfa, 0x4c, 0x66, 0xda,
-	0xef, 0x10, 0x75, 0x65, 0xb2, 0x0f, 0xe0, 0x26, 0xb8, 0x8c, 0x31, 0xf3, 0xbb, 0xc3, 0xd6, 0x89,
-	0x37, 0x66, 0x23, 0x7b, 0xf6, 0x23, 0x33, 0xd1, 0xb0, 0xf4, 0xa0, 0xe9, 0xfc, 0xb6, 0x10, 0xff,
-	0x4f, 0x67, 0xef, 0x74, 0x26, 0x00, 0x21, 0xbf, 0x2f, 0x37, 0x95, 0x9d, 0x82, 0x7b, 0x47, 0xdb,
-	0x4a, 0x83, 0xf1, 0xc6, 0xef, 0xea, 0x91, 0xb5, 0x85, 0x0e, 0x4b, 0xd7, 0xe0, 0x1a, 0xe0, 0x1c,
-	0xf5, 0x73, 0x28, 0xca, 0xed, 0x6f, 0x56, 0xdb, 0x1f, 0xe4, 0xd0, 0x2f, 0x16, 0xfa, 0x59, 0xac,
-	0xdf, 0x80, 0x73, 0x63, 0x5e, 0x39, 0x11, 0x7b, 0xe3, 0xb7, 0xf5, 0x18, 0x4b, 0x31, 0x61, 0xe1,
-	0x17, 0xfc, 0xd9, 0x80, 0x7e, 0xb1, 0x2a, 0x2f, 0xd9, 0xcd, 0xa6, 0x8e, 0xd6, 0xbe, 0x3a, 0xac,
-	0xdd, 0xac, 0xea, 0xb8, 0x83, 0xfe, 0x24, 0x32, 0x0b, 0xf4, 0xa2, 0x65, 0xec, 0x59, 0xe1, 0xe0,
-	0xc1, 0x85, 0xde, 0x94, 0x6b, 0x1e, 0x62, 0xb6, 0x90, 0x69, 0x86, 0xec, 0x3d, 0x40, 0xa6, 0xb9,
-	0xce, 0xb3, 0x33, 0x29, 0x2a, 0x79, 0x58, 0x88, 0xd9, 0xba, 0x39, 0x66, 0x19, 0xbf, 0xad, 0x4e,
-	0x53, 0x65, 0xb2, 0x53, 0x68, 0x0b, 0xae, 0x79, 0xd9, 0xe4, 0x17, 0xf5, 0x0a, 0xed, 0x1c, 0x85,
-	0x41, 0xce, 0x83, 0x07, 0x07, 0xda, 0xc6, 0xb4, 0xee, 0x5f, 0x97, 0x8a, 0x1d, 0x82, 0xb7, 0x16,
-	0xe5, 0xe5, 0xb4, 0xec, 0xc2, 0x86, 0xea, 0x3a, 0x2e, 0x7a, 0xb2, 0x74, 0x3c, 0x80, 0x4e, 0xa1,
-	0xdc, 0xcb, 0x29, 0x09, 0xd3, 0x09, 0xd7, 0xb6, 0xa5, 0x71, 0x87, 0xc2, 0xb6, 0x35, 0xee, 0x1e,
-	0xd6, 0xf8, 0xd1, 0xae, 0xc6, 0x6b, 0x3a, 0xee, 0x3c, 0xa1, 0xe3, 0xee, 0xa3, 0x3a, 0x86, 0x43,
-	0x3a, 0xf6, 0x9e, 0xd2, 0x31, 0xfb, 0x1a, 0x5e, 0xf3, 0x25, 0x8f, 0x13, 0x3e, 0x4b, 0xf0, 0x3a,
-	0xe7, 0xa9, 0x8e, 0xf5, 0xca, 0xef, 0x11, 0xdf, 0xee, 0x03, 0xf6, 0x01, 0x5e, 0x29, 0x34, 0x5f,
-	0x2f, 0x14, 0x6b, 0xe7, 0x3e, 0x39, 0xef, 0xe0, 0xa6, 0x3f, 0x2d, 0x35, 0x4f, 0xa8, 0xc2, 0xe3,
-	0x61, 0xe3, 0xa4, 0x15, 0x6e, 0x00, 0xd3, 0x5f, 0x44, 0x42, 0x12, 0x53, 0xae, 0xd1, 0xff, 0xa4,
-	0xe8, 0xcf, 0x82, 0x4c, 0x7c, 0x69, 0x7e, 0x5c, 0xf9, 0xaf, 0x8a, 0xf9, 0xac, 0x01, 0xf6, 0x15,
-	0x1c, 0x27, 0x3c, 0xd3, 0x3f, 0x4b, 0x11, 0xdf, 0xc4, 0xe4, 0xf2, 0x9a, 0x5c, 0xb6, 0x50, 0x53,
-	0xb1, 0x8d, 0x50, 0x32, 0x46, 0x9e, 0x3b, 0xb8, 0xa9, 0x49, 0x61, 0x24, 0x95, 0xf8, 0x45, 0x1b,
-	0xb7, 0x4f, 0x8b, 0x9a, 0x2c, 0x88, 0x05, 0xd0, 0x53, 0x78, 0x83, 0x0a, 0xd3, 0x88, 0x72, 0xbe,
-	0xa1, 0xb6, 0x6a, 0x58, 0xf0, 0x4f, 0x03, 0x3c, 0x3a, 0x8d, 0xcf, 0x56, 0xc6, 0xb8, 0xa6, 0x8c,
-	0xf7, 0x5b, 0xda, 0xdd, 0xa4, 0xb0, 0x85, 0x31, 0x82, 0x8e, 0x79, 0xbf, 0xbf, 0xae, 0x16, 0xf8,
-	0x5f, 0xfe, 0x1b, 0x0c, 0x2e, 0x4a, 0x1d, 0x7d, 0x0f, 0xdd, 0xa4, 0x8c, 0xcb, 0xfc, 0x06, 0xad,
-	0x4d, 0x70, 0x38, 0x61, 0x95, 0x22, 0xdc, 0x04, 0x8d, 0xff, 0x6e, 0x42, 0xe7, 0x87, 0xf9, 0x22,
-	0x91, 0x2b, 0x44, 0xf6, 0x2d, 0xb4, 0x42, 0x7e, 0xcf, 0xfc, 0x3d, 0x14, 0x74, 0x72, 0x06, 0x6f,
-	0x0f, 0x92, 0xb3, 0x09, 0xb8, 0xc5, 0x8d, 0x65, 0xef, 0xf6, 0x5d, 0xde, 0x8a, 0x61, 0x70, 0xf8,
-	0x52, 0xb0, 0xef, 0xa0, 0x75, 0x8e, 0x7a, 0x3b, 0xfd, 0xe6, 0x6b, 0xf3, 0x68, 0xf0, 0x04, 0xdc,
-	0xe2, 0xb6, 0x6e, 0xe7, 0xaf, 0x9d, 0xf8, 0xa7, 0x28, 0x8a, 0x43, 0xbc, 0x4d, 0x51, 0x3b, 0xcf,
-	0x8f, 0x51, 0xcc, 0x5c, 0xc2, 0x4e, 0xff, 0x0d, 0x00, 0x00, 0xff, 0xff, 0xd7, 0x6b, 0x49, 0x32,
-	0x2d, 0x0a, 0x00, 0x00,
+	// 1087 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x57, 0xdf, 0x6e, 0xe3, 0xc4,
+	0x17, 0x56, 0x9a, 0x26, 0x9b, 0x9c, 0x34, 0xf9, 0x75, 0x67, 0xdb, 0xae, 0x9b, 0xf6, 0xd7, 0x0d,
+	0x16, 0xac, 0x4a, 0x85, 0x02, 0x4a, 0xb9, 0x40, 0x20, 0xd0, 0x66, 0x1b, 0xd8, 0x2d, 0x82, 0x8a,
+	0x75, 0x0b, 0x37, 0xdc, 0x30, 0x8d, 0x4f, 0x5a, 0xb3, 0x8e, 0x1d, 0xec, 0x71, 0xba, 0x79, 0x00,
+	0x1e, 0x86, 0xd7, 0x5b, 0xc4, 0x2d, 0x42, 0x73, 0x66, 0xec, 0xd8, 0x89, 0x9d, 0xae, 0xd4, 0xde,
+	0xc1, 0x5d, 0xce, 0xe7, 0xf3, 0x6f, 0x66, 0xce, 0x7c, 0xdf, 0x04, 0x9a, 0x21, 0x06, 0x53, 0x67,
+	0x88, 0xdd, 0x49, 0xe0, 0x0b, 0x9f, 0x6d, 0x4c, 0x02, 0xdf, 0x8e, 0x86, 0x82, 0x2c, 0xf3, 0x03,
+	0x68, 0x5a, 0xf8, 0x5b, 0x84, 0xa1, 0x78, 0x89, 0xdc, 0xc6, 0x80, 0x6d, 0x41, 0x45, 0xf8, 0xaf,
+	0xd1, 0x33, 0x4a, 0x9d, 0xd2, 0x61, 0xdd, 0x52, 0x86, 0xf9, 0x13, 0xac, 0x7f, 0x87, 0xd3, 0x19,
+	0x6b, 0xc1, 0x9a, 0x63, 0xd3, 0xa7, 0x8a, 0xb5, 0xe6, 0xd8, 0x8c, 0xc1, 0xba, 0xc7, 0xc7, 0x68,
+	0xac, 0x91, 0x33, 0xfd, 0x96, 0x58, 0xc0, 0x05, 0x1a, 0x65, 0xf2, 0xa2, 0xdf, 0x6c, 0x07, 0xaa,
+	0x7c, 0xec, 0x47, 0x9e, 0x30, 0xd6, 0x09, 0xd5, 0x96, 0xf9, 0x67, 0x19, 0x1a, 0x27, 0x01, 0x72,
+	0x81, 0xdf, 0x38, 0xe8, 0xda, 0x6c, 0x1f, 0xea, 0x37, 0x3c, 0xc0, 0x6b, 0x3f, 0x0a, 0x51, 0x97,
+	0x99, 0x03, 0x32, 0xcb, 0x14, 0x3d, 0xdb, 0x0f, 0xa8, 0x5e, 0xc5, 0xd2, 0x56, 0xd2, 0x45, 0x39,
+	0xd5, 0x45, 0x07, 0x1a, 0x36, 0x86, 0xc3, 0xc0, 0x99, 0x08, 0xc7, 0xf7, 0xa8, 0x6c, 0xdd, 0x4a,
+	0x43, 0xac, 0x0d, 0xb5, 0x21, 0x17, 0x78, 0xe5, 0x07, 0x33, 0xa3, 0x42, 0xf9, 0x12, 0x5b, 0xf6,
+	0x71, 0x19, 0x70, 0xcf, 0x3e, 0x93, 0x69, 0xab, 0x14, 0x3b, 0x07, 0x64, 0xee, 0xb1, 0x6f, 0xa3,
+	0x7b, 0x16, 0x8d, 0x2f, 0x31, 0x30, 0x1e, 0xa8, 0xdc, 0x29, 0x88, 0x19, 0xf0, 0xc0, 0x43, 0x71,
+	0xe2, 0x87, 0xc2, 0xa8, 0x51, 0xea, 0xd8, 0x64, 0x47, 0x50, 0x75, 0x71, 0xea, 0x60, 0x68, 0xd4,
+	0x3b, 0xe5, 0xc3, 0x46, 0x8f, 0x75, 0xd3, 0xe7, 0xd1, 0x95, 0xbb, 0x6c, 0x69, 0x0f, 0xd9, 0x85,
+	0xf0, 0x05, 0x77, 0x29, 0x0f, 0xa8, 0xdd, 0x48, 0x00, 0xd6, 0x83, 0xad, 0x10, 0x5d, 0xd7, 0xf1,
+	0xae, 0xa4, 0xf9, 0x1c, 0x47, 0x7e, 0x80, 0x17, 0xfc, 0x8d, 0xd1, 0x20, 0xc7, 0xdc, 0x6f, 0xec,
+	0x29, 0xb4, 0x34, 0x7e, 0xc1, 0xdf, 0x58, 0xf2, 0x94, 0x36, 0xc8, 0x7b, 0x01, 0x65, 0x47, 0xb0,
+	0x39, 0x47, 0xfa, 0xea, 0xe4, 0x9a, 0xe4, 0xb9, 0x84, 0xb3, 0x4f, 0xe0, 0x51, 0xaa, 0x56, 0x7f,
+	0x24, 0x30, 0x90, 0x6d, 0xb4, 0xc8, 0x3d, 0xef, 0x13, 0x9d, 0xfa, 0x8f, 0x13, 0xfb, 0xbf, 0x53,
+	0xff, 0x57, 0x9d, 0x7a, 0x1f, 0xc0, 0xe2, 0x37, 0x9a, 0x6d, 0xd8, 0x31, 0x54, 0xaf, 0x89, 0x71,
+	0xe8, 0xc0, 0x1b, 0xbd, 0xbd, 0xec, 0x8e, 0x64, 0x48, 0xc9, 0xd2, 0xae, 0xe6, 0x2b, 0x80, 0x17,
+	0x28, 0xee, 0x92, 0x42, 0x33, 0xd8, 0x5a, 0xcc, 0x60, 0x66, 0x04, 0x4d, 0x45, 0x40, 0x77, 0xca,
+	0xfa, 0x31, 0x54, 0x46, 0x72, 0x94, 0x29, 0x71, 0xa3, 0xb7, 0x9b, 0x8d, 0x49, 0x31, 0x9c, 0xa5,
+	0xfc, 0xcc, 0xdf, 0x4b, 0xd0, 0x54, 0x57, 0xe0, 0x3e, 0x57, 0x33, 0xef, 0xa3, 0x9c, 0xd7, 0x47,
+	0xea, 0xce, 0xc5, 0x7d, 0x5c, 0x43, 0xb3, 0x3f, 0x94, 0x17, 0xe3, 0x5e, 0xdb, 0xc8, 0xb9, 0x9a,
+	0xe6, 0xdf, 0x25, 0xd8, 0xf9, 0x41, 0xa5, 0x7a, 0x15, 0x71, 0x4f, 0x38, 0x62, 0x76, 0xaf, 0x35,
+	0xbf, 0x84, 0x75, 0x9b, 0x0b, 0xae, 0x57, 0xfe, 0x61, 0x36, 0x45, 0x7e, 0xe1, 0xee, 0x80, 0x0b,
+	0x6e, 0x51, 0x58, 0xfb, 0x17, 0x58, 0x97, 0x96, 0xbc, 0x03, 0x01, 0x4a, 0xc5, 0x44, 0x3b, 0xf6,
+	0xd6, 0x94, 0xb4, 0x84, 0xb3, 0x8f, 0xe0, 0x21, 0x9f, 0x72, 0xc7, 0xe5, 0x97, 0x2e, 0x26, 0xce,
+	0xaa, 0xa3, 0xe5, 0x0f, 0xe6, 0x5b, 0x80, 0x0d, 0x2a, 0x88, 0xe1, 0xc4, 0xf7, 0x42, 0x64, 0x07,
+	0x00, 0xa1, 0xe0, 0x22, 0x0a, 0x4f, 0x7c, 0x3b, 0xe6, 0xbd, 0x14, 0x22, 0xe9, 0x64, 0x8c, 0x61,
+	0xc8, 0xaf, 0x62, 0x7d, 0x8d, 0x4d, 0x76, 0x9c, 0x59, 0xeb, 0x93, 0xec, 0x5a, 0xd3, 0x35, 0xd2,
+	0x2b, 0x7c, 0x5b, 0xd7, 0x4b, 0x9c, 0x8b, 0x78, 0x9d, 0x76, 0xae, 0x03, 0x8d, 0x84, 0x6d, 0x4f,
+	0x07, 0x7a, 0x01, 0x69, 0x28, 0x4b, 0xd0, 0xea, 0x50, 0x53, 0x04, 0xdd, 0x86, 0x9a, 0xa2, 0xe4,
+	0xd3, 0x81, 0x96, 0xf7, 0xc4, 0x4e, 0x91, 0x77, 0x85, 0xc2, 0x62, 0xf2, 0x3e, 0x00, 0x88, 0x69,
+	0xf7, 0x74, 0x40, 0x5c, 0x5b, 0xb1, 0x52, 0x48, 0x86, 0xa6, 0x15, 0xd3, 0xce, 0x69, 0x3a, 0x9e,
+	0xae, 0x5a, 0x31, 0xf1, 0xd7, 0x97, 0x89, 0x7f, 0x1f, 0xea, 0xe1, 0xeb, 0x48, 0x93, 0x37, 0xa8,
+	0x35, 0x24, 0x40, 0x96, 0xfa, 0x1b, 0xb7, 0x50, 0xff, 0xc6, 0x4a, 0xea, 0x6f, 0x66, 0xa9, 0xff,
+	0x29, 0xb4, 0x6c, 0x27, 0x9c, 0xb8, 0x7c, 0x76, 0xa6, 0x1d, 0x5a, 0x14, 0xbe, 0x80, 0xa6, 0x24,
+	0xe2, 0x7f, 0xb7, 0x4a, 0x44, 0xee, 0xe0, 0x6d, 0x16, 0x0c, 0x5e, 0xee, 0x48, 0x3f, 0x2c, 0x18,
+	0xe9, 0x8c, 0xf8, 0xb0, 0x45, 0xf1, 0x39, 0x82, 0x4d, 0xdd, 0xf5, 0x45, 0xe2, 0xf4, 0x88, 0x56,
+	0xb3, 0x84, 0x17, 0x0a, 0xd5, 0xd6, 0x0a, 0xa1, 0x7a, 0x06, 0x7b, 0x3a, 0xcf, 0x79, 0x5e, 0xe8,
+	0x36, 0x95, 0x5a, 0xe5, 0x92, 0x23, 0x75, 0x3b, 0xb9, 0x52, 0xf7, 0x29, 0x6c, 0x67, 0xd3, 0xc4,
+	0xee, 0x8f, 0xa9, 0x46, 0xfe, 0xc7, 0x5c, 0x81, 0x34, 0x0a, 0x04, 0xf2, 0x33, 0x78, 0xbc, 0x94,
+	0x44, 0x87, 0xec, 0x52, 0x8d, 0xa2, 0xcf, 0x45, 0xd2, 0xda, 0x2e, 0x94, 0x56, 0xf6, 0x15, 0xb4,
+	0x97, 0x37, 0x25, 0x09, 0xdc, 0xa3, 0x72, 0x2b, 0x3c, 0xe4, 0x7c, 0x0f, 0x49, 0xa3, 0xec, 0x81,
+	0xdc, 0x83, 0x7d, 0x35, 0xdf, 0x29, 0x48, 0xce, 0x85, 0x36, 0x9f, 0xcf, 0x8c, 0xff, 0xab, 0xfb,
+	0x91, 0x00, 0x72, 0xd7, 0x5d, 0x1e, 0x8a, 0xef, 0x7d, 0xdb, 0x19, 0x39, 0xe4, 0x72, 0xa0, 0x66,
+	0x3c, 0x8b, 0xca, 0xfd, 0x4b, 0x23, 0x54, 0xec, 0x89, 0x9a, 0x9f, 0x45, 0x5c, 0xf6, 0x14, 0xe0,
+	0xd0, 0x0f, 0xec, 0x73, 0x21, 0xdd, 0x3a, 0xaa, 0xa7, 0x14, 0xc4, 0x4c, 0xd8, 0x08, 0x70, 0x84,
+	0x01, 0x7a, 0x43, 0xaa, 0xf9, 0x5e, 0xa7, 0x74, 0x58, 0xb6, 0x32, 0x98, 0xf9, 0x57, 0x09, 0x1a,
+	0xf4, 0xea, 0xb8, 0x33, 0xe7, 0xf6, 0x32, 0x9c, 0x7b, 0xb0, 0x20, 0x51, 0xf3, 0x12, 0x69, 0xca,
+	0xed, 0x42, 0x4d, 0xde, 0xdb, 0x8b, 0xd9, 0x04, 0xdf, 0xe5, 0xaf, 0x53, 0xfb, 0xa5, 0x66, 0xe8,
+	0x67, 0x50, 0x77, 0x75, 0x5c, 0x68, 0x94, 0x88, 0x0e, 0xcc, 0xe2, 0x82, 0x71, 0x09, 0x6b, 0x1e,
+	0x64, 0x7e, 0x0b, 0xad, 0x73, 0x67, 0x3c, 0x71, 0xf1, 0xee, 0x2b, 0xef, 0xfd, 0x51, 0x86, 0xda,
+	0xd7, 0xe3, 0x89, 0xeb, 0xcf, 0x10, 0xd9, 0xe7, 0x50, 0xb6, 0xf8, 0x0d, 0x33, 0x72, 0xda, 0x21,
+	0x4d, 0x6d, 0xef, 0x16, 0x36, 0xca, 0xfa, 0x50, 0x55, 0x4f, 0x21, 0xb6, 0x97, 0xf7, 0x40, 0x8a,
+	0x33, 0xb4, 0x8b, 0xf5, 0x8c, 0x7d, 0x01, 0xe5, 0x17, 0x28, 0x16, 0xcb, 0xcf, 0x1f, 0x85, 0x2b,
+	0x83, 0xfb, 0x50, 0x55, 0x4f, 0xa0, 0xc5, 0xfa, 0x99, 0x97, 0xd8, 0x6d, 0x29, 0xd4, 0x7b, 0x69,
+	0x31, 0x45, 0xe6, 0x15, 0xb5, 0x32, 0xc5, 0xcf, 0xb0, 0xdd, 0xb7, 0x7f, 0x8d, 0x42, 0xb1, 0xf0,
+	0x28, 0x61, 0xef, 0xbf, 0xcb, 0x9b, 0xa5, 0xbd, 0x9f, 0xf5, 0xca, 0x9e, 0xf2, 0x65, 0x95, 0xd0,
+	0xe3, 0x7f, 0x02, 0x00, 0x00, 0xff, 0xff, 0x98, 0x01, 0x0f, 0x46, 0xf5, 0x0f, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1044,6 +1406,7 @@ type EmployeeClient interface {
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*DataResponse, error)
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*DataResponse, error)
 	Action(ctx context.Context, in *ActionRequest, opts ...grpc.CallOption) (*DataResponse, error)
+	AdjustProductQuantity(ctx context.Context, in *ProductQuantityRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
 }
 
 type employeeClient struct {
@@ -1099,6 +1462,15 @@ func (c *employeeClient) Action(ctx context.Context, in *ActionRequest, opts ...
 	return out, nil
 }
 
+func (c *employeeClient) AdjustProductQuantity(ctx context.Context, in *ProductQuantityRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
+	out := new(SimpleResponse)
+	err := c.cc.Invoke(ctx, "/productproto.Employee/AdjustProductQuantity", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EmployeeServer is the server API for Employee service.
 type EmployeeServer interface {
 	Raw(context.Context, *RawRequest) (*RawResponse, error)
@@ -1106,6 +1478,7 @@ type EmployeeServer interface {
 	Get(context.Context, *GetRequest) (*DataResponse, error)
 	Update(context.Context, *UpdateRequest) (*DataResponse, error)
 	Action(context.Context, *ActionRequest) (*DataResponse, error)
+	AdjustProductQuantity(context.Context, *ProductQuantityRequest) (*SimpleResponse, error)
 }
 
 // UnimplementedEmployeeServer can be embedded to have forward compatible implementations.
@@ -1126,6 +1499,9 @@ func (*UnimplementedEmployeeServer) Update(ctx context.Context, req *UpdateReque
 }
 func (*UnimplementedEmployeeServer) Action(ctx context.Context, req *ActionRequest) (*DataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Action not implemented")
+}
+func (*UnimplementedEmployeeServer) AdjustProductQuantity(ctx context.Context, req *ProductQuantityRequest) (*SimpleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AdjustProductQuantity not implemented")
 }
 
 func RegisterEmployeeServer(s *grpc.Server, srv EmployeeServer) {
@@ -1222,6 +1598,24 @@ func _Employee_Action_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Employee_AdjustProductQuantity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductQuantityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmployeeServer).AdjustProductQuantity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/productproto.Employee/AdjustProductQuantity",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmployeeServer).AdjustProductQuantity(ctx, req.(*ProductQuantityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Employee_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "productproto.Employee",
 	HandlerType: (*EmployeeServer)(nil),
@@ -1245,6 +1639,10 @@ var _Employee_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Action",
 			Handler:    _Employee_Action_Handler,
+		},
+		{
+			MethodName: "AdjustProductQuantity",
+			Handler:    _Employee_AdjustProductQuantity_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

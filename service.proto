@@ -9,7 +9,8 @@ message RequestHeader {
 message Levy {
     int32 id = 1;
     string name = 2;
-    int32 amount = 3;
+    int32 rate = 3;
+    int32 amount = 4;
 }
 
 message CreateField {
@@ -22,6 +23,11 @@ message CreateField {
     string modelNumber = 7;
     int32  netCost = 8;
     repeated Levy levies = 9;
+    int32 totalCost = 10;
+    int32 sellingCostBeforeTax = 11;
+    int32 sellingTaxRate = 12;
+    int32 sellingTaxAmount = 13;
+    int32 sellingCostAfterTax = 14;
 }
 
 message UpdateField {
@@ -34,6 +40,11 @@ message UpdateField {
     string modelNumber = 7;
     int32  netCost = 8;
     repeated Levy levies = 9;
+    int32 totalCost = 10;
+    int32 sellingCostBeforeTax = 11;
+    int32 sellingTaxRate = 12;
+    int32 sellingTaxAmount = 13;
+    int32 sellingCostAfterTax = 14;
 }
 
 message RawRequest {
@@ -62,6 +73,16 @@ message ActionRequest {
     string name = 3;
 }
 
+message ProductQuantityRequest {
+    RequestHeader header = 1;
+    int32 id = 2;
+    message Data {
+        int32 reservedQuantity = 1;
+        int32 availableQuantity = 2;
+    }
+    Data data = 3;
+}
+
 message DataResponse {
     int32 statusCode = 1;
     string message = 2;
@@ -71,21 +92,34 @@ message DataResponse {
         string warehouse = 3;
         int32 vendorID = 4;
         string vendor = 5;
-        string name = 6;
-        string description = 7;
-        string brandName = 8;
-        string modelNumber = 9;
-        int32 netCost = 10;
-        repeated Levy levies = 11;
-        int32 availableQuantity = 12;
-        int32 reservedQuantity = 13;
-        int64 totalCost = 14;
-        string createdDate = 15;
-        string createdBy = 16;
-        string lastModifiedBy = 17;
-        string lastModifiedDate = 18;
-        string recordState = 19;
-        int64 referencedBy = 20;
+        int32 categoryID = 6;
+        string category = 7;
+        string name = 8;
+        string description = 9;
+        string skuNumber = 10;
+        string brandName = 11;
+        string modelNumber = 12;
+        int32 netCost = 13;
+        string displayNetCost = 14;
+        repeated Levy levies = 15;
+        int32 availableQuantity = 16;
+        int32 reservedQuantity = 17;
+        int32 totalCost = 18;
+        string displayTotalCost = 19;
+        int32 sellingCostBeforeTax = 20;
+        string displaySellingCostBeforeTax = 21;
+        int32 sellingTaxRate = 22;
+        string displaySellingTaxRate = 23;
+        int32 sellingTaxAmount = 24;
+        string displaySellingTaxAmount = 25;
+        int32 sellingCostAfterTax = 26;
+        string displaySellingCostAfterTax = 27;
+        string createdDate = 28;
+        string createdBy = 29;
+        string lastModifiedBy = 30;
+        string lastModifiedDate = 31;
+        string recordState = 32;
+        int64 referencedBy = 33;
     }
     Data data = 3;
 }
@@ -103,11 +137,17 @@ message RawResponse {
     Data data = 3;
 }
 
+message SimpleResponse {
+    int32 statusCode = 1;
+    string message = 2;
+}
+
 service Employee {
     rpc Raw(RawRequest) returns (RawResponse);
     rpc Create(CreateRequest) returns (DataResponse);
     rpc Get(GetRequest) returns (DataResponse);
     rpc Update(UpdateRequest) returns (DataResponse);
     rpc Action(ActionRequest) returns (DataResponse);
+    rpc AdjustProductQuantity(ProductQuantityRequest) returns (SimpleResponse);
 }
 
