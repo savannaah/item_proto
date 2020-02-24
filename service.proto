@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package productproto;
+package itemproto;
 
 message RequestHeader {
     string token = 1;
@@ -9,8 +9,8 @@ message RequestHeader {
 message Levy {
     int32 id = 1;
     string name = 2;
-    int32 rate = 3;
-    int32 amount = 4;
+    float rate = 3;
+    double amount = 4;
 }
 
 message CreateField {
@@ -21,13 +21,11 @@ message CreateField {
     int32 category = 5;
     string brandName = 6;
     string modelNumber = 7;
-    int32  netCost = 8;
+    double  netCost = 8;
     repeated Levy levies = 9;
-    int32 totalCost = 10;
-    int32 sellingCostBeforeTax = 11;
-    int32 sellingTaxRate = 12;
-    int32 sellingTaxAmount = 13;
-    int32 sellingCostAfterTax = 14;
+    double totalCost = 10;
+    double sellingCostBeforeTax = 11;
+    float sellingTaxRate = 12;
 }
 
 message UpdateField {
@@ -38,13 +36,11 @@ message UpdateField {
     int32 category = 5;
     string brandName = 6;
     string modelNumber = 7;
-    int32  netCost = 8;
+    double  netCost = 8;
     repeated Levy levies = 9;
-    int32 totalCost = 10;
-    int32 sellingCostBeforeTax = 11;
-    int32 sellingTaxRate = 12;
-    int32 sellingTaxAmount = 13;
-    int32 sellingCostAfterTax = 14;
+    double totalCost = 10;
+    double sellingCostBeforeTax = 11;
+    float sellingTaxRate = 12;
 }
 
 message RawRequest {
@@ -99,20 +95,20 @@ message DataResponse {
         string skuNumber = 10;
         string brandName = 11;
         string modelNumber = 12;
-        int32 netCost = 13;
+        double netCost = 13;
         string displayNetCost = 14;
         repeated Levy levies = 15;
         int32 availableQuantity = 16;
         int32 reservedQuantity = 17;
-        int32 totalCost = 18;
+        double totalCost = 18;
         string displayTotalCost = 19;
-        int32 sellingCostBeforeTax = 20;
+        double sellingCostBeforeTax = 20;
         string displaySellingCostBeforeTax = 21;
-        int32 sellingTaxRate = 22;
+        float sellingTaxRate = 22;
         string displaySellingTaxRate = 23;
-        int32 sellingTaxAmount = 24;
+        double sellingTaxAmount = 24;
         string displaySellingTaxAmount = 25;
-        int32 sellingCostAfterTax = 26;
+        double sellingCostAfterTax = 26;
         string displaySellingCostAfterTax = 27;
         string createdDate = 28;
         string createdBy = 29;
@@ -127,12 +123,8 @@ message DataResponse {
 message RawResponse {
     int32 statusCode = 1;
     string message = 2;
-    message LevyType {
-        int32 id = 1;
-        string name = 2;
-    }
     message Data {
-        repeated LevyType levyTypes = 1;
+        repeated Levy levyTypes = 1;
     }
     Data data = 3;
 }
@@ -140,6 +132,11 @@ message RawResponse {
 message SimpleResponse {
     int32 statusCode = 1;
     string message = 2;
+    message Data {
+        int32 reservedQuantity = 1;
+        int32 availableQuantity = 2;
+    }
+    Data data = 3;
 }
 
 service Employee {
