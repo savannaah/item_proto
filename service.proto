@@ -11,6 +11,7 @@ message Levy {
     string name = 2;
     float rate = 3;
     double amount = 4;
+    string displayAmount = 5;
 }
 
 message CreateField {
@@ -23,9 +24,8 @@ message CreateField {
     string modelNumber = 7;
     double  netCost = 8;
     repeated Levy levies = 9;
-    double totalCost = 10;
-    double sellingCostBeforeTax = 11;
-    float sellingTaxRate = 12;
+    double sellingCostBeforeTax = 10;
+    float sellingTaxRate = 11;
 }
 
 message UpdateField {
@@ -38,9 +38,8 @@ message UpdateField {
     string modelNumber = 7;
     double  netCost = 8;
     repeated Levy levies = 9;
-    double totalCost = 10;
-    double sellingCostBeforeTax = 11;
-    float sellingTaxRate = 12;
+    double sellingCostBeforeTax = 10;
+    float sellingTaxRate = 11;
 }
 
 message RawRequest {
