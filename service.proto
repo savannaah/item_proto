@@ -108,8 +108,23 @@ message DataResponse {
 message RawResponse {
     int32 statusCode = 1;
     string message = 2;
+    message Item {
+        int32 id = 1;
+        string name = 2;
+        string displayName = 3;
+        string alignment = 4;
+        bool sortable = 5;
+    }
+    message Rows {
+        map<string, string> Row = 1;
+    }
+    message Option {
+        repeated Item columns = 1;
+        repeated Rows data = 2;
+    }
     message Data {
-        repeated Levy levyTypes = 1;
+        Option levies = 1;
+        Option categories = 2;
     }
     Data data = 3;
 }
@@ -117,6 +132,7 @@ message RawResponse {
 message SimpleResponse {
     int32 statusCode = 1;
     string message = 2;
+
     message Data {
         int32 reservedQuantity = 1;
         int32 availableQuantity = 2;
