@@ -11,7 +11,6 @@ message Levy {
     string name = 2;
     float rate = 3;
     double amount = 4;
-    string displayAmount = 5;
 }
 
 message RequestField {
@@ -81,26 +80,20 @@ message DataResponse {
         string brandName = 11;
         string modelNumber = 12;
         double netCost = 13;
-        string displayNetCost = 14;
-        repeated Levy levies = 15;
-        int32 availableQuantity = 16;
-        int32 reservedQuantity = 17;
-        double totalCost = 18;
-        string displayTotalCost = 19;
-        double sellingCostBeforeTax = 20;
-        string displaySellingCostBeforeTax = 21;
-        float sellingTaxRate = 22;
-        string displaySellingTaxRate = 23;
-        double sellingTaxAmount = 24;
-        string displaySellingTaxAmount = 25;
-        double sellingCostAfterTax = 26;
-        string displaySellingCostAfterTax = 27;
-        string createdDate = 28;
-        string createdBy = 29;
-        string lastModifiedBy = 30;
-        string lastModifiedDate = 31;
-        string recordState = 32;
-        int64 referencedBy = 33;
+        repeated Levy levies = 14;
+        int32 availableQuantity = 15;
+        int32 reservedQuantity = 16;
+        double totalCost = 17;
+        double sellingCostBeforeTax = 18;
+        float sellingTaxRate = 19;
+        double sellingTaxAmount = 20;
+        double sellingCostAfterTax = 21;
+        string createdDate = 22;
+        string createdBy = 23;
+        string lastModifiedBy = 24;
+        string lastModifiedDate = 25;
+        string recordState = 26;
+        int64 referencedBy = 27;
     }
     Data data = 3;
 }
