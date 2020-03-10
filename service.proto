@@ -94,6 +94,7 @@ message DataResponse {
         string lastModifiedDate = 25;
         string recordState = 26;
         int64 referencedBy = 27;
+        string currency = 28;
     }
     Data data = 3;
 }
@@ -118,6 +119,7 @@ message RawResponse {
     message Data {
         Option levies = 1;
         Option categories = 2;
+        string currency = 3;
     }
     Data data = 3;
 }
